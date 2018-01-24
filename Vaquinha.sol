@@ -9,6 +9,7 @@ contract Vaquinha {
     uint numOfMembers = 0;
     
     mapping (uint => address) members;
+    mapping (address => uint) invested;
     
     modifier isManager() {
         require(msg.sender == manager);
@@ -36,9 +37,16 @@ contract Vaquinha {
     }
     
     function sendFunds() public payable {
-        require(msg.value == quota); //one is only allowed to invest 
+        require(msg.value == quota); //one is only allowed to invest a fixed amount
+        
+        if (invested[msg.sender] == 0) { //new investor
+            numOfMembers++;
+            members[numOfMembers] = msg.sender;
+        }
+        
+        invested[msg.sender] += msg.value;
     }
     
-    function withdraw() public returns(bool){
+    function withdraw() public returns(bool) {
     }
 }
