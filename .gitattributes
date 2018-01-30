@@ -1,0 +1,2 @@
+$ more .gitattributes
+*.sol linguist-language=solidity
