@@ -1,2 +1,2 @@
-# LittleCow
-LittleCow (Vaquinha) - ICO Investment Club
+# Vaquinha
+Vaquinha (aka LittleCow) - ICO Pool Contract
