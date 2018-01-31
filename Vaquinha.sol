@@ -1,5 +1,21 @@
 pragma solidity ^0.4.2;
 
+// ----------------------------------------------------------------------------
+// ERC Token Standard #20 Interface
+// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
+// ----------------------------------------------------------------------------
+contract ERC20Interface {
+    function totalSupply() public constant returns (uint);
+    function balanceOf(address tokenOwner) public constant returns (uint balance);
+    function allowance(address tokenOwner, address spender) public constant returns (uint remaining);
+    function transfer(address to, uint tokens) public returns (bool success);
+    function approve(address spender, uint tokens) public returns (bool success);
+    function transferFrom(address from, address to, uint tokens) public returns (bool success);
+
+    event Transfer(address indexed from, address indexed to, uint tokens);
+    event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
+}
+
 contract Vaquinha {
     address manager;
     address icoContract;
@@ -23,6 +39,8 @@ contract Vaquinha {
                        address _icoContract, 
                        uint _daysToBuy) 
     public {
+        require(_amountRequired > 0 && _quota > 0 && _daysToBuy > 0 && _icoContract != 0x0);
+        
         manager = msg.sender; //set ownership
 
         amountRequired = _amountRequired;
@@ -85,10 +103,15 @@ contract Vaquinha {
     }
     
     function buyTokens() public {
+        require(icoContract != 0x0 && now >= endDate);
         
     }
     
-    function sendTokens() public {
+    function getIcoTokens() public isManager {
+        
+    }
+    
+    function getMyTokens() public {
         
     }
     
